@@ -44,4 +44,8 @@ public class ObligController {
     public Bilett hentBilett(int id) {
         return rep.hentBilett(id);
     }
+    @PostMapping("/lagreEndringen")
+    public void lagreEndring(Bilett enbilett) {
+        rep.lagreEndring(enbilett);
+    }
 }

@@ -46,4 +46,8 @@ public class ObligRepository {
         Bilett enBilett = db.queryForObject(sql, liste, BeanPropertyRowMapper.newInstance(Bilett.class));
         return enBilett;
     }
+    public void lagreEndring(Bilett enBilett) {
+        String sql = "UPDATE Bilett SET filmnavn=?, antall=?, etternavn=?, fornavn=?, tlf=?, epost=? WHERE id =?";
+        db.update(sql, enBilett.getFilmnavn(), enBilett.getAntall(), enBilett.getEtternavn(), enBilett.getFornavn(), enBilett.getTlf(), enBilett.getEpost(), enBilett.getId());
+    }
 }

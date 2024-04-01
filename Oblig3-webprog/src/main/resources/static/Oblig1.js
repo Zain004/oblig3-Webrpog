@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     hentFilmer();
     hentBiletter();
@@ -96,6 +95,78 @@ function hentBilett(id){
     })
 }
 
+function lagreEndring() {
+    let filmnavn = $("#valgtFilm").val();
+    let antall = $("#Antall").val();
+    let fornavn = $("#Fornavn").val();
+    let etternavn = $("#Etternavn").val();
+    let tlf = $("#Telefonnr").val();
+    let epost = $("#Epost").val();
+
+    const valgtFilm = $("#valgtFilm").val();
+    if(valgtFilm === "Velg film") {
+        $("#valgtfilmen").text("Velg en film");
+        event.preventDefault();
+        return;
+    }
+    filmnavn = valgtFilm;
+
+    const antallet = $("#Antall").val();
+    if(isNaN(antallet) || antallet <= 0) {
+        $("#tomt_Antall").text("Må skrive inn noe antall").css('color','red');
+        event.preventDefault();
+        return;
+    }
+    antall = antallet;
+
+    const fornavnet = $("#Fornavn").val();
+    if(fornavnet === "") {
+        $("#tomt_fornavn").text("Må skrive inn noe i Fornavnet!").css('color','red');
+        event.preventDefault();
+        return;
+    }
+    fornavn = fornavnet;
+
+    const etternavnet = $("#Etternavn").val();
+    if(etternavnet === "") {
+        $("#tomt_Etternavn").text("Må skrive inn noe i Etternavnet").css('color','red');
+        event.preventDefault();
+        return;
+    }
+    etternavn = etternavnet;
+
+    const telefonnummeret = $("#Telefonnr").val();
+    if(telefonnummeret === "" || isNaN(telefonnummeret) || telefonnummeret.length !== 8) {
+        $("#tomt_telefonnr").text("Må skrive et gyldig telefonnr på 8 siffer").css('color','red');
+        event.preventDefault();
+        return;
+    }
+
+    tlf = telefonnummeret;
+
+    const eposten = $("#Epost").val();
+    const epostRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!epostRegex.test(eposten)) {
+        $("#tomt_epost").text("Skriv inn en gyldig e-postadresse").css('color', 'red');
+        event.preventDefault();
+        return;
+    }
+    epost = eposten;
+
+    const bilett = {
+        id : $("#id").val(),
+        filmnavn : $("#valgtFilm").val(),
+        antall : $("#Antall").val(),
+        fornavn : $("#Fornavn").val(),
+        etternavn : $("#Etternavn").val(),
+        tlf : $("#Telefonnr").val(),
+        epost : $("#Epost").val(),
+    };
+    $.post("/lagreEndringen",bilett, function () {
+
+    })
+}
+
 function slettEnBilett(id) {
     const url = "/slettEnBilett?id=" + id;
     $.get(url, function () {
@@ -170,6 +241,6 @@ function regBilett() {
         epost : epost
     };
     lagreBilett(film);
-    hentFilmer();
-    $('input').val('');
+    window.location.href="/";
 }
+
