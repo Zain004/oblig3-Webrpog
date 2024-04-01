@@ -35,4 +35,9 @@ public class ObligController {
     public void slettBiletter() {
         rep.slettBiletter();
     }
+
+    @GetMapping("/slettEnBilett")
+    public void slettEnBilett(int id) {
+        rep.slettEnBilett(id);
+    }
 }

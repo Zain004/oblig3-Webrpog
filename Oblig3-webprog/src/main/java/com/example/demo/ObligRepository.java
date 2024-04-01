@@ -34,4 +34,9 @@ public class ObligRepository {
         String sql = "DELETE FROM Bilett";
         db.update(sql);
     }
+
+    public void slettEnBilett(int id) {
+        String sql = "DELETE FROM Bilett WHERE id=?";
+        db.update(sql,id);
+    }
 }
