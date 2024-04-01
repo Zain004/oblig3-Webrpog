@@ -39,4 +39,11 @@ public class ObligRepository {
         String sql = "DELETE FROM Bilett WHERE id=?";
         db.update(sql,id);
     }
+    public Bilett hentBilett(int id) {
+        Object[] liste = new Object[1];
+        liste[0] = id;
+        String sql = "SELECT * FROM Bilett WHERE id=?";
+        Bilett enBilett = db.queryForObject(sql, liste, BeanPropertyRowMapper.newInstance(Bilett.class));
+        return enBilett;
+    }
 }

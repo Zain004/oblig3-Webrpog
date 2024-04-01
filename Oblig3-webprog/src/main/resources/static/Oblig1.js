@@ -76,10 +76,24 @@ function formater(filmListe) {
         ut+= '<td>'+ enFilm.etternavn +'</td>';
         ut+= '<td>'+ enFilm.tlf +'</td>';
         ut+= '<td>'+ enFilm.epost +'</td>';
-        ut+= '<td><button class="btn btn-primary" onclick="slettEnBilett('+ enFilm.id +')">Slett</button></td>';
+        ut+= '<td><button class="btn btn-primary" onclick="hentBilett('+ enFilm.id +')">Endre</button></td>'
+        ut+= '<td><button class="btn btn-danger" onclick="slettEnBilett('+ enFilm.id +')">Slett</button></td></br>';
         ut+= '</tr>';
     }
     $("#resultat").html(ut);
+}
+
+function hentBilett(id){
+    const url = "/hentEnBilett?id=" + id;
+    $.get(url, function (enBilett) {
+        $("#id").val(enBilett.id);
+        $("#valgtFilm").val(enBilett.filmnavn);
+        $("#Antall").val(enBilett.antall);
+        $("#Fornavn").val(enBilett.fornavn);
+        $("#Etternavn").val(enBilett.etternavn);
+        $("#Telefonnr").val(enBilett.tlf);
+        $("#Epost").val(enBilett.epost);
+    })
 }
 
 function slettEnBilett(id) {
@@ -159,4 +173,3 @@ function regBilett() {
     hentFilmer();
     $('input').val('');
 }
-

@@ -40,4 +40,8 @@ public class ObligController {
     public void slettEnBilett(int id) {
         rep.slettEnBilett(id);
     }
+    @GetMapping("/hentEnBilett")
+    public Bilett hentBilett(int id) {
+        return rep.hentBilett(id);
+    }
 }
