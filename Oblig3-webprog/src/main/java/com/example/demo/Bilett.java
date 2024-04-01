@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor //autogenerer en konctruktør
 @Data //generer auto get og set metoder
 public class Bilett {
+    private int id;
     private String filmnavn;
     private int antall;
     private String etternavn;
@@ -16,3 +17,4 @@ public class Bilett {
     private String tlf;
     private String epost;
 }
+
