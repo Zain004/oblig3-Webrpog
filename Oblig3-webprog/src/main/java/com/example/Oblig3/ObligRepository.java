@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
+
 @Repository
 public class ObligRepository {
     @Autowired
@@ -15,7 +16,7 @@ public class ObligRepository {
 
     private Logger logger = LoggerFactory.getLogger(ObligRepository.class);
     public List<Film> filmer() {
-        String sql = "SELECT * FROM Film order by filmnavn";
+        String sql = "SELECT * FROM Film";
         try {
             List<Film> alleFilmer = db.query(sql,new BeanPropertyRowMapper<>(Film.class));
             return alleFilmer;
