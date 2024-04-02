@@ -6,6 +6,9 @@ $(document).ready(function () {
 function hentFilmer() {
     $.get("/hentFilmer",function (filmer){
         formaterFilmer(filmer);
+    }).fail(function (jqXHR) {
+        const json = $.parseJSON(jqXHR.responseText);
+        $("#feil").html(json.message);
     })
 }
 
@@ -51,17 +54,20 @@ function Antall(innData) {
 function hentBiletter() {
     $.get("/hentBiletter",function (filmer) {
         formater(filmer);
+    }).fail(function (jqXHR) {
+        const json = $.parseJSON(jqXHR.responseText);
+        $("#feil").html(json.message);
     })
 }
 
-function lagreBilett(bilett) {
-    $.post("/lagreBilett",bilett, function () {
-    })
-}
+
 
 function slettAlleBiletter() {
     $.get("/slettBiletter",function () {
         hentBiletter();
+    }).fail(function (jqXHR) {
+        const json = $.parseJSON(jqXHR.responseText);
+        $("#feil").html(json.message);
     })
 }
 
@@ -232,7 +238,7 @@ function regBilett() {
         return;
     }
     epost = eposten;
-    const film = {
+    const bilett = {
         filmnavn : filmnavn,
         antall : antall,
         fornavn : fornavn,
@@ -240,7 +246,11 @@ function regBilett() {
         tlf : tlf,
         epost : epost
     };
-    lagreBilett(film);
+    $.post("/lagreBilett",bilett, function () {
+    }).fail(function (jqXHR) {
+        const json = $.parseJSON(jqXHR.responseText);
+        $("#feil").html(json.message);
+    })
     window.location.href="/";
 }
 
