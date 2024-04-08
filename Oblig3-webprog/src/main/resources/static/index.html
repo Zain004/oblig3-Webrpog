@@ -24,24 +24,25 @@
                     <span id="tomt_Antall"></span>
                 </div>
                 <div class="form-group">
-                    <label for="Fornavn">Fornavn </label> <input type="text" id="Fornavn" class="form-control"/>
-                    <span id="tomt_fornavn"></span>
+                    <label for="Fornavn">Fornavn </label> <input type="text" id="Fornavn" onchange="validerNavn()" class="form-control"/>
+                    <span id="feilFornavn"></span>
                 </div>
                 <div class="form-group">
-                    <label for="Etternavn">Etternavn </label> <input type="text" id="Etternavn" class="form-control"/>
-                    <span id="tomt_Etternavn"></span>
+                    <label for="Etternavn">Etternavn </label> <input type="text" id="Etternavn" onchange="validerEtternavn()" class="form-control"/>
+                    <span id="feilEtternavn"></span>
                 </div>
                 <div class="form-group">
-                    <label for="Telefonnr">Telefonnr </label> <input type="text" id="Telefonnr" class="form-control"/>
-                    <span id="tomt_telefonnr"></span>
+                    <label for="Telefonnr">Telefonnr </label> <input type="text" id="Telefonnr" onchange="validerTlf()" class="form-control"/>
+                    <span id="feilTelefonnr"></span>
                 </div>
                 <div class="form-group">
-                    <label for="Epost">Epost </label> <input type="text" id="Epost" class="form-control"/>
-                    <span id="tomt_epost"></span>
+                    <label for="Epost">Epost </label> <input type="text" id="Epost" onchange="validerEmail()" class="form-control"/>
+                    <span id="feilEpost"></span>
                 </div>
                 <div class="form-group">
                     <button onclick="regBilett()" class="btn btn-primary">Kjøp bilett</button>
                     <button onclick="lagreEndring()" class="btn btn-primary">Lagre</button>
+                    <button onclick="tilbakestill()" class="btn btn-primary">Nullstill</button>
                 </div>
             </form>
         </div>
