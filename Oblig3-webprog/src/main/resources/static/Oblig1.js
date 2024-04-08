@@ -101,6 +101,7 @@ function hentBilett(id){
     })
 }
 
+
 function lagreEndring() {
     let filmnavn = $("#valgtFilm").val();
     let antall = $("#Antall").val();
@@ -126,24 +127,27 @@ function lagreEndring() {
     antall = antallet;
 
     const fornavnet = $("#Fornavn").val();
-    if(fornavnet === "") {
-        $("#tomt_fornavn").text("Må skrive inn noe i Fornavnet!").css('color','red');
+    const regexFornavn = /^[a-zA-ZæøåÆØÅ. \-]{2,30}$/;
+    if(!regexFornavn.test(fornavnet)) {
+        $("#feilFornavn").text("Må skrive inn noe i Fornavnet!").css('color','red');
         event.preventDefault();
         return;
     }
     fornavn = fornavnet;
 
     const etternavnet = $("#Etternavn").val();
-    if(etternavnet === "") {
-        $("#tomt_Etternavn").text("Må skrive inn noe i Etternavnet").css('color','red');
+    const regexEtternavn = /^[a-zA-ZæøåÆØÅ. \-]{2,30}$/;
+    if(!regexEtternavn.test(etternavnet)) {
+        $("#feilEtternavn").text("Må skrive inn noe i Etternavnet").css('color','red');
         event.preventDefault();
         return;
     }
     etternavn = etternavnet;
 
     const telefonnummeret = $("#Telefonnr").val();
-    if(telefonnummeret === "" || isNaN(telefonnummeret) || telefonnummeret.length !== 8) {
-        $("#tomt_telefonnr").text("Må skrive et gyldig telefonnr på 8 siffer").css('color','red');
+    const regexTlf = /^[0-9]{8}$/;
+    if(!regexTlf.test(telefonnummeret)) {
+        $("#feilTelefonnr").text("Må skrive et gyldig telefonnr på 8 siffer").css('color','red');
         event.preventDefault();
         return;
     }
@@ -153,7 +157,7 @@ function lagreEndring() {
     const eposten = $("#Epost").val();
     const epostRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!epostRegex.test(eposten)) {
-        $("#tomt_epost").text("Skriv inn en gyldig e-postadresse").css('color', 'red');
+        $("#feilEpost").text("Skriv inn en gyldig e-postadresse").css('color', 'red');
         event.preventDefault();
         return;
     }
@@ -178,6 +182,62 @@ function slettEnBilett(id) {
     $.get(url, function () {
         window.location.href = "/";
     })
+}
+function validerNavn() {
+    const fornavnet = $("#Fornavn").val();
+    const regexFornavn = /^[a-zA-ZæøåÆØÅ. \-]{2,30}$/;
+    const ok = regexFornavn.test(fornavnet);
+    if(!ok) {
+        $("#feilFornavn").text("Må skrive inn noe i Fornavnet!").css('color','red');
+        event.preventDefault();
+        return false;
+    }
+    else {
+        $("#feilFornavn").html("");
+        return true;
+    }
+}
+function validerEtternavn() {
+    const etternavnet = $("#Etternavn").val();
+    const regexEtternavn = /^[a-zA-ZæøåÆØÅ. \-]{2,30}$/;
+    const ok = regexEtternavn.test(etternavnet);
+    if(!ok) {
+        $("#feilEtternavn").text("Må skrive inn noe i Etternavnet").css('color','red');
+        event.preventDefault();
+        return false;
+    }
+    else {
+        $("#feilEtternavn").html("");
+        return true;
+    }
+}
+function validerTlf() {
+    const telefonnummeret = $("#Telefonnr").val();
+    const regexTlf = /^[0-9]{8}$/;
+    const ok = regexTlf.test(telefonnummeret);
+    if(!ok) {
+        $("#feilTelefonnr").text("Må skrive et gyldig telefonnr på 8 siffer").css('color','red');
+        event.preventDefault();
+        return false;
+    }
+    else {
+        $("#feilTelefonnr").html("");
+        return true;
+    }
+}
+function validerEmail() {
+    const eposten = $("#Epost").val();
+    const epostRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const ok = epostRegex.test(eposten);
+    if (!ok) {
+        $("#feilEpost").text("Skriv inn en gyldig e-postadresse").css('color', 'red');
+        event.preventDefault();
+        return false;
+    }
+    else {
+        $("#feilEpost").html("");
+        return true;
+    }
 }
 function regBilett() {
     let filmnavn = $("#valgtFilm").val();
@@ -206,24 +266,27 @@ function regBilett() {
     antall = antallet;
 
     const fornavnet = $("#Fornavn").val();
-    if(fornavnet === "") {
-        $("#tomt_fornavn").text("Må skrive inn noe i Fornavnet!").css('color','red');
+    const regexFornavn = /^[a-zA-ZæøåÆØÅ. \-]{2,30}$/;
+    if(!regexFornavn.test(fornavnet)) {
+        $("#feilFornavn").text("Må skrive inn noe i Fornavnet!").css('color','red');
         event.preventDefault();
         return;
     }
     fornavn = fornavnet;
 
     const etternavnet = $("#Etternavn").val();
-    if(etternavnet === "") {
-        $("#tomt_Etternavn").text("Må skrive inn noe i Etternavnet").css('color','red');
+    const regexEtternavn = /^[a-zA-ZæøåÆØÅ. \-]{2,30}$/;
+    if(!regexEtternavn.test(etternavnet)) {
+        $("#feilEtternavn").text("Må skrive inn noe i Etternavnet").css('color','red');
         event.preventDefault();
         return;
     }
     etternavn = etternavnet;
 
     const telefonnummeret = $("#Telefonnr").val();
-    if(telefonnummeret === "" || isNaN(telefonnummeret) || telefonnummeret.length !== 8) {
-        $("#tomt_telefonnr").text("Må skrive et gyldig telefonnr på 8 siffer").css('color','red');
+    const regexTlf = /^[0-9]{8}$/;
+    if(!regexTlf.test(telefonnummeret)) {
+        $("#feilTelefonnr").text("Må skrive et gyldig telefonnr på 8 siffer").css('color','red');
         event.preventDefault();
         return;
     }
@@ -233,7 +296,7 @@ function regBilett() {
     const eposten = $("#Epost").val();
     const epostRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!epostRegex.test(eposten)) {
-        $("#tomt_epost").text("Skriv inn en gyldig e-postadresse").css('color', 'red');
+        $("#feilEpost").text("Skriv inn en gyldig e-postadresse").css('color', 'red');
         event.preventDefault();
         return;
     }
@@ -252,5 +315,15 @@ function regBilett() {
         $("#feil").html(json.message);
     })
     window.location.href="/";
+}
+
+function tilbakestill() {
+    $("#id").val("");
+    $("#valgtFilm").val("");
+    $("#Antall").val("");
+    $("#Fornavn").val("");
+    $("#Etternavn").val();
+    $("#Telefonnr").val("");
+    $("#Epost").val("");
 }
 
